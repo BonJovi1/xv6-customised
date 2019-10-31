@@ -1,3 +1,30 @@
+# xv6-customised
+
+Implementing a few system calls in xv6, a toy operating system developed by MIT. 
+
+## New files added
+- invertcase.c
+- ps.c
+- set_priority.c
+- test.c
+
+And a report.txt explaining them all 
+
+## Files modified
+
+In order to implement these system calls, we make alterations to the following files:
+- Makefile
+- defs.h
+- proc.c
+- proc.h
+- syscall.c
+- syscall.h
+- sysproc.c
+- user.h
+- usys.S
+
+# The original README, forked from MIT/xv6-public
+
 xv6 is a re-implementation of Dennis Ritchie's and Ken Thompson's Unix
 Version 6 (v6).  xv6 loosely follows the structure and style of v6,
 but is implemented for a modern x86-based multiprocessor using ANSI C.

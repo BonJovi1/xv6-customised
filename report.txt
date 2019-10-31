@@ -1,0 +1,179 @@
+Abhinav Gupta
+20171059
+OS Assignment 5 (The last one :P)
+
+1) Implemented 'invertcase' which inverts the case of the input.
+
+2) Implemented the 'ps' syscall which shows the name, process ID, state and the priority of the process, and the set_priority syscall which changes the priority of the given Process ID
+
+All the processes are initially given priority 60.
+Output after running ps:
+
+$ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 4 	 RUNNING 	 60
+
+
+Now we create two processes in the background by running the benchmark code. 
+Output:
+
+$ test &
+$ test &
+$ ps 
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 8 	 RUNNING 	 60
+ test 	 5 	 RUNNABLE 	 60
+ test 	 7 	 RUNNING 	 60
+ $ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 9 	 RUNNING 	 60
+ test 	 5 	 RUNNING 	 60
+ test 	 7 	 RUNNABLE 	 60
+ $ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 10 	 RUNNING 	 60
+ test 	 5 	 RUNNING 	 60
+ test 	 7 	 RUNNABLE 	 60
+ $ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 11 	 RUNNING 	 60
+ test 	 5 	 RUNNING 	 60
+ test 	 7 	 RUNNABLE 	 60
+ $ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 12 	 RUNNING 	 60
+ test 	 5 	 RUNNABLE 	 60
+ test 	 7 	 RUNNING 	 60
+ $ 
+
+Since the priorities are equal, the state keeps switching amongst them. (Round Robin)
+
+Now we lower the priority value of one process to 30 (means more priority) and then run ps again. 
+
+$ test &
+$ test &
+$ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 18 	 RUNNING 	 60
+ test 	 15 	 RUNNABLE 	 60
+ test 	 17 	 RUNNING 	 60
+ $ set_priority 15 30
+main-loop: WARNING: I/O thread spun for 1000 iterations
+$ ps 
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 20 	 RUNNING 	 60
+ test 	 15 	 RUNNING 	 30
+ test 	 17 	 RUNNABLE 	 60
+ $ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 21 	 RUNNING 	 60
+ test 	 15 	 RUNNING 	 30
+ test 	 17 	 RUNNABLE 	 60
+ $ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 22 	 RUNNING 	 60
+ test 	 15 	 RUNNING 	 30
+ test 	 17 	 RUNNABLE 	 60
+ $ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 23 	 RUNNING 	 60
+ test 	 15 	 RUNNING 	 30
+ test 	 17 	 RUNNABLE 	 60
+ $ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 24 	 RUNNING 	 60
+ test 	 15 	 RUNNING 	 30
+ test 	 17 	 RUNNABLE 	 60
+ $ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 25 	 RUNNING 	 60
+ test 	 15 	 RUNNING 	 30
+ test 	 17 	 RUNNABLE 	 60
+ $ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 26 	 RUNNING 	 60
+ test 	 15 	 RUNNING 	 30
+ test 	 17 	 RUNNABLE 	 60
+ $ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 27 	 RUNNING 	 60
+ test 	 15 	 RUNNING 	 30
+ test 	 17 	 RUNNABLE 	 60
+ $ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 28 	 RUNNING 	 60
+ test 	 15 	 RUNNING 	 30
+ test 	 17 	 RUNNABLE 	 60
+ $ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 29 	 RUNNING 	 60
+ test 	 15 	 RUNNING 	 30
+ test 	 17 	 RUNNABLE 	 60
+ $ ps
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 30 	 RUNNING 	 60
+ test 	 15 	 RUNNING 	 30
+ test 	 17 	 RUNNABLE 	 60
+ 
+So as we can see, PID 15 stays in 'Running' state because it has more priority. Also we notice how PID 17 got preempted from Running to runnable as soon as we changed priority of PID 15. 
+
+
+COMPARISON BETWEEN ROUND-ROBIN AND PRIORITY SCHEDULING
+a) In round-robin all processes are scheduled in a circular manner.
+b) Whereas in priority scheduling a process is preemped if a higher process with higher priority comes and rescheduling is done.
+c) In priority scheduling starvation takes place ie., lower priorities are not allocated CPU until all the processes with higher priority are added. So it may be possible that certain lower priority processes don't execute at all!  
+
+3) Implemented System Call Tracing
+Sample output:
+
+ps
+read -> 1
+read -> 1
+read -> 1
+fork -> 3
+sbrk -> 16384
+exec -> 0
+Name 	 PID 	 State 	 	 Priority 
+init 	 1 	 SLEEPING 	 60
+ sh 	 2 	 SLEEPING 	 60
+ ps 	 3 	 RUNNING 	 60
+ ps -> 2
+wait -> 3
+$write -> 1
+ write -> 1
