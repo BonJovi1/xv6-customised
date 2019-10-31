@@ -23,7 +23,7 @@ In order to implement these system calls, we make alterations to the following f
 - user.h
 - usys.S
 
-# The original README, forked from MIT/xv6-public
+## The original README, forked from MIT/xv6-public
 
 xv6 is a re-implementation of Dennis Ritchie's and Ken Thompson's Unix
 Version 6 (v6).  xv6 loosely follows the structure and style of v6,
